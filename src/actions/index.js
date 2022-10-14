@@ -1,11 +1,17 @@
 import jsonPlhldr from "../api/jsonPlhldr";
 
-export const fetchPosts = async () => {
-  // BAD approach!!!
-  const response = await jsonPlhldr.get('/posts');
+export const fetchPosts =  () => {
+  
+  return async function (dispatch, getState) {
 
-  return {
-    type: 'FETCH_POSTS',
-    payload: response
-  };
+    const response = await jsonPlhldr.get('/posts');
+    
+    dispatch({ type : 'FETCH_POSTS', payload: response})
+  }
 };
+
+
+// return {
+//   type: 'FETCH_POSTS',
+//   payload: response
+// };
