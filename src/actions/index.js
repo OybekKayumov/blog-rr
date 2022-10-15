@@ -7,10 +7,30 @@ export const fetchPosts = () => async dispatch => {
   dispatch({ type: 'FETCH_POSTS', payload: response.data });
 };
 
-export const fetchUser = id => async dispatch => {
+export const fetchUser = id => dispatch => {
+  // const response = await jsonPlhldr.get(`/users/${id}`);
+  // dispatch({ type: "FETCH_USER", payload: response.data })
+  
+  _fetchUser(id, dispatch);
+};
+
+// private function
+const _fetchUser = _.memoize( async (id, dispatch) => {
   const response = await jsonPlhldr.get(`/users/${id}`);
   dispatch({ type: "FETCH_USER", payload: response.data })
-};
+});
+
+
+//* lodash memoize --> no changes
+// export const fetchUser = function(id) { 
+//   return _.memoize(async function(dispatch) {
+//     const response = await jsonPlhldr.get(`/users/${id}`);
+    
+//     dispatch({ type: "FETCH_USER", payload: response.data });
+//   })
+// };
+
+
 
 //? WE ARE DEFINING A FUNCTION (fetchPosts) 
 //? THAT IS GOING TO RETURN A FUNCTION (dispatch)
