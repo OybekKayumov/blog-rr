@@ -5,7 +5,6 @@ import UserHeader from './UserHeader';
 
 class PostList extends React.Component {
   componentDidMount() {
-    // this.props.fetchPosts();
     this.props.fetchPostsAndUsers();
   }
 
@@ -27,18 +26,15 @@ class PostList extends React.Component {
   }
 
   render() {
-    console.log(this.props.posts);
     return <div className="ui relaxed divided list">{this.renderList()}</div>;
   }
 }
 
 const mapStateToProps = state => {
-  return { posts: state.posts }; 
+  return { posts: state.posts };
 };
 
 export default connect(
-  mapStateToProps, 
-  // { fetchPosts }
+  mapStateToProps,
   { fetchPostsAndUsers }
-  )(PostList);
-  
+)(PostList);

@@ -1,9 +1,21 @@
 import _ from 'lodash';
-import jsonPlhldr from "../api/jsonPlhldr";
+import jsonPlhldr from '../api/jsonPlhldr';
 
-export const fetchPostsAndUsers = async () => {
-  
-}
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
+  // console.log('About to fetch posts');
+  await dispatch(fetchPosts());
+  // console.log('fetched posts!!');
+
+  const userIds = _.uniq(_.map(getState().posts, 'userId'));
+  userIds.forEach(id => dispatch(fetchUser(id)));
+
+
+  // _.chain(getState().posts)
+  //   .map('userId')
+  //   .uniq()
+  //   .forEach(id => dispatch(fetchUser(id)))
+  //   .value(); //* execute or run
+};
 
 //TODO: totally equivalent to origin
 export const fetchPosts = () => async dispatch => {
@@ -13,7 +25,7 @@ export const fetchPosts = () => async dispatch => {
 
 export const fetchUser = id => async dispatch => {
   const response = await jsonPlhldr.get(`/users/${id}`);
-  dispatch({ type: "FETCH_USER", payload: response.data })
+  dispatch({ type: 'FETCH_USER', payload: response.data });
 };
 
 
