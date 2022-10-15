@@ -6,15 +6,16 @@ export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts());
   // console.log('fetched posts!!');
 
-  const userIds = _.uniq(_.map(getState().posts, 'userId'));
-  userIds.forEach(id => dispatch(fetchUser(id)));
+  //! WORKS
+  // const userIds = _.uniq(_.map(getState().posts, 'userId'));
+  // userIds.forEach(id => dispatch(fetchUser(id)));
 
-
-  // _.chain(getState().posts)
-  //   .map('userId')
-  //   .uniq()
-  //   .forEach(id => dispatch(fetchUser(id)))
-  //   .value(); //* execute or run
+  //* refactoring with chain
+  _.chain(getState().posts)
+    .map('userId')
+    .uniq()
+    .forEach(id => dispatch(fetchUser(id)))
+    .value(); //* execute or run
 };
 
 //TODO: totally equivalent to origin
@@ -30,7 +31,7 @@ export const fetchUser = id => async dispatch => {
 
 
 
-//* lodash memoize --> WORKS
+//! lodash memoize --> WORKS
 // export const fetchUser = id => dispatch => _fetchUser(id, dispatch);
 
 // // private function _fetchUser
