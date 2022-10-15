@@ -19,6 +19,8 @@ class PostList extends React.Component {
               <p>{post.body}</p>
             </div>
           </div>
+
+          {/* <UserHEader userId={userId} /> */}
         </div>
       )
     })
