@@ -3,7 +3,7 @@ import jsonPlhldr from "../api/jsonPlhldr";
 //TODO: totally equivalent to origin
 export const fetchPosts =  () => async dispatch => {
   const response = await jsonPlhldr.get('/posts');
-    dispatch({ type : 'FETCH_POSTS', payload: response})
+    dispatch({ type : 'FETCH_POSTS', payload: response.data });
 }
 
 
